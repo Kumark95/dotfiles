@@ -79,7 +79,7 @@ ex ()
 ### Aliases
 ########################################
 
-alias ll="ls -lah"
+alias ll="ls -FlAhp"
 
 alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
