@@ -99,7 +99,7 @@ export PATH=/opt/PhpStorm-203.5981.175/bin:$PATH
 ########################################
 
 # Activate led backlight on keyboard
-if ! command -v xset &> /dev/null
+if command -v xset &> /dev/null
 then
     xset led 3
 fi
