@@ -85,8 +85,6 @@ alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcdu="docker-compose down && docker-compose up -d"
 
-alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
-
 
 #######################################
 ### Env variables
@@ -102,3 +100,14 @@ export PATH=/opt/PhpStorm-203.5981.175/bin:$PATH
 
 # Activate led backlight on keyboard
 xset led 3
+
+{{/* WSL Specific configuration */}}
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+# Change initial directory to dotnet repos
+cd /mnt/c/Users/$USER/source/repos
+
+{{   end }}
+{{ end }}
+
