@@ -1,0 +1,67 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Always show statusline
+set laststatus=2
+
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
+
+" Vim language
+let $LANG='en'
+set langmenu=en
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spaces/Tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Mouse Scrolling
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set mouse=nicr
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"=> Trailing spaces
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! CleanExtraSpaces() "Function to clean unwanted spaces
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+
+autocmd BufWritePre * :call CleanExtraSpaces()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"=> Convert text to UTF-8
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"This basically set everything in utf-8 in every circumtances
+setglobal termencoding=utf-8 fileencodings=
+scriptencoding utf-8
+set encoding=utf-8
+
+autocmd BufNewFile,BufRead  *   try
+autocmd BufNewFile,BufRead  *   set encoding=utf-8
+autocmd BufNewFile,BufRead  *   endtry
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"=> Convert to UNIX fileformat (avoid CRLF)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set fileformat=unix
