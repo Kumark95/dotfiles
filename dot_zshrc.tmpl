@@ -89,8 +89,9 @@ alias dcdu="docker-compose down && docker-compose up -d"
 #######################################
 ### Env variables
 #######################################
-export PATH=~/.config/composer/vendor/bin:$PATH
-export PATH=/opt/PhpStorm-203.5981.175/bin:$PATH
+export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.config/composer/vendor/bin
+export PATH=$PATH:/opt/PhpStorm-203.5981.175/bin
 
 
 
