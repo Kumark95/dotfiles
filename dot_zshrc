@@ -1,0 +1,104 @@
+########################################
+### Base config
+########################################
+
+DEFAULT_USER="$USER"
+
+# Include timestamp in history command output
+HIST_STAMPS="yyyy-mm-dd"
+
+
+########################################
+### Oh-my-Zsh configuration
+########################################
+
+# Path to installation.
+export ZSH="/home/$USER/.oh-my-zsh"
+
+# Theme
+ZSH_THEME="ys"
+
+# Plugins to load
+plugins=(
+  git
+  gitignore
+  extract
+  fasd
+  docker
+  docker-compose
+)
+
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+
+source $ZSH/oh-my-zsh.sh
+
+
+########################################
+### User config
+########################################
+
+export EDITOR='vim'
+
+
+########################################
+### Functions
+########################################
+
+# usage: ex <file>
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   unzstd $1    ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+
+########################################
+### Aliases
+########################################
+
+alias ll="ls -lah"
+
+alias dcu="docker-compose up -d"
+alias dcd="docker-compose down"
+alias dcdu="docker-compose down && docker-compose up -d"
+
+alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+
+
+#######################################
+### Env variables
+#######################################
+export PATH=~/.config/composer/vendor/bin:$PATH
+export PATH=/opt/PhpStorm-203.5981.175/bin:$PATH
+
+
+
+########################################
+### Other
+########################################
+
+# Activate led backlight on keyboard
+xset led 3
